@@ -37,7 +37,7 @@ jobs:
       - name: Update Lambda function
         run: |
           aws lambda update-function-code \
-            --function-name tech-floripa-certified-builder-dev \
+            --function-name tech-floripa-certified-notification-dev \
             --image-uri ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com/${{ secrets.ECR_REPOSITORY_NOTIFICATION }}:latest
       
       - name: Complete
