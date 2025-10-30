@@ -49,7 +49,7 @@ class ProcessCertificateNotification:
                         updated_certificate
                     )
                     
-                    updated_certificate.authenticity_verification_url = self._generate_tech_floripa_validation_url(notification.validation_code, notification.authenticity_verification_url, notification.order_id)
+                    updated_certificate.authenticity_verification_url = notification.authenticity_verification_url
                     updated_certificate.validation_code = notification.validation_code
                     
                     updated_certificates.append(updated_certificate)
@@ -121,23 +121,4 @@ class ProcessCertificateNotification:
         else:
             # Se não existe, retorna string vazia
             logger.warning(f"Certificado não encontrado no S3 para a chave: {certificate_key}")
-            return ""
-
-    def _generate_tech_floripa_validation_url(self, validation_code: str, authenticity_verification_url: str, order_id: str) -> str:
-        """
-        Gera a URL de verificação de autenticidade para a Tech Floripa.
-        
-        Args:
-            validation_code: Código de validação do certificado
-            authenticity_verification_url: URL base para verificação de autenticidade
-            
-        Returns:
-            str: URL completa para verificação de autenticidade
-        """
-        if authenticity_verification_url and validation_code:
-            full_url = f"{authenticity_verification_url}?validate_code={validation_code}&order_id={order_id}"
-            logger.info(f"URL de verificação de autenticidade gerada: {full_url}")
-            return full_url
-        else:
-            logger.warning("URL base de verificação de autenticidade não fornecida.")
-            return ""
+            return ""    
