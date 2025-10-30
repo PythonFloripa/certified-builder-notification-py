@@ -8,6 +8,8 @@ class Certificate(BaseModel):
     certificate_key: Optional[str] = None
     certificate_url: Optional[str] = None
     generated_date: Optional[str] = None
+    validation_code : Optional[str] = None
+    authenticity_verification_url : Optional[str] = None
     order_id: int
     order_date: str
     product_id: int

@@ -5,9 +5,10 @@ class CertificateNotificationResponse(BaseModel):
     """
     Modelo de resposta da fila de notificação de certificados.
     Representa o resultado do processamento de um certificado.
-    [{"order_id": 452, "product_id": 316, "product_name": "Evento de Teste", "email": "jardelgodinho@gmail.com", "certificate_key": "certificates/316/452/Jardel_GodinhoEvento_de_Teste_AD9-B58-BFA.png", "success": true}, {"order_id": 317, "product_id": 316, "product_name": "Evento de Teste", "email": "jardel.godinho@gmail.com", "certificate_key": "certificates/316/317/Jardel_GodinhoEvento_de_Teste_443-C8D-B05.png", "success": true}]
     """
-    order_id: int = Field(..., description="ID da ordem processada")
+    order_id: int = Field(..., description="ID da ordem processada")    
+    validation_code: str = Field(..., description="Código de validação do certificado")
+    authenticity_verification_url: str = Field(..., description="URL para verificação de autenticidade do certificado")
     product_id: int = Field(..., description="ID do produto")
     product_name: str = Field(..., description="Nome do produto")
     email: str = Field(..., description="Email do participante")

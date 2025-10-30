@@ -84,6 +84,11 @@ class CertificateRepositoryImpl(CertificateRepository):
             if 'order_id' in update_data:
                 del update_data['order_id']
             
+            if 'authenticity_verification_url' in update_data:
+                del update_data['authenticity_verification_url']
+            if 'validation_code' in update_data:
+                del update_data['validation_code']
+
             # Constrói a expressão de atualização
             update_expression = "SET "
             expression_values = {}
