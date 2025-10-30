@@ -10,6 +10,8 @@ class CertificateNotificationItem(BaseModel):
     """
     id: str = Field(..., description="ID do certificado (convertido de UUID para string)")
     order_id: int = Field(..., description="ID do pedido")
+    validation_code: str = Field(..., description="Código de validação do certificado")
+    authenticity_verification_url: str = Field(..., description="URL para verificação de autenticidade do certificado")
     product_id: int = Field(..., description="ID do produto")
     product_name: str = Field(..., description="Nome do produto")
     certificate_url: str | None = Field(None, description="URL do certificado")
@@ -55,6 +57,8 @@ class TechFloripaNotification(BaseModel):
             CertificateNotificationItem(
                 id=cert.id,  # Será convertido automaticamente pelo validator
                 order_id=cert.order_id,
+                validation_code=cert.validation_code,
+                authenticity_verification_url=cert.authenticity_verification_url,
                 product_id=cert.product_id,
                 product_name=cert.product_name,
                 certificate_url=cert.certificate_url,

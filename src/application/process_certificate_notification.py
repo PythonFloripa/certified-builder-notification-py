@@ -48,6 +48,10 @@ class ProcessCertificateNotification:
                         str(updated_certificate.id),
                         updated_certificate
                     )
+                    
+                    updated_certificate.authenticity_verification_url = notification.authenticity_verification_url
+                    updated_certificate.validation_code = notification.validation_code
+                    
                     updated_certificates.append(updated_certificate)
                     
                     logger.info(f"Certificado atualizado com sucesso - Order ID: {notification.order_id}")
@@ -117,4 +121,4 @@ class ProcessCertificateNotification:
         else:
             # Se não existe, retorna string vazia
             logger.warning(f"Certificado não encontrado no S3 para a chave: {certificate_key}")
-            return ""
+            return ""    
