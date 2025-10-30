@@ -41,7 +41,7 @@ class CertificateNotificationTechFloripa:
     )
     def send_notification(self, notifications: TechFloripaNotification):
         try:
-            logger.info(f"Enviando notificação para a API da Tech Floripa", extra={"body": notifications.model_dump()})
+            logger.info(f"Enviando notificação para a API da Tech Floripa: {notifications.model_dump()}")
             with httpx.Client(
                 timeout=self.timeout_config,
                 headers=self.headers,

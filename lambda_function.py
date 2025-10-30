@@ -33,7 +33,7 @@ def get_notifications_from_event(event) -> CertificateNotificationBatch:
     else:
         # Se já é um objeto, usa diretamente
         notifications_data = body
-    
+    logger.info(f"Notificações extraídas do evento: {notifications_data}")
     return CertificateNotificationBatch.model_validate(notifications_data)
     
 
