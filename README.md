@@ -15,6 +15,12 @@ Este projeto é uma função AWS Lambda responsável por processar notificaçõe
 - HTTPX
 - Docker
 
+## Desenvolvimento e Deploy
+
+- **Local**: `docker compose up --build` expõe a Lambda em `http://localhost:9000`.
+- **Deploy**: o workflow `.github/workflows/workflow_build.yaml` gera um ZIP e atualiza a função `tech-floripa-certificates-notification-dev`.
+- **Infra**: a fila SQS continua ligada pela infraestrutura Terraform; apenas o artefato de código mudou de imagem para ZIP.
+
 ## Estrutura do Evento
 
 ### Entrada (SQS)
