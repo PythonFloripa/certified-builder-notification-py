@@ -21,6 +21,38 @@ Este projeto é uma função AWS Lambda responsável por processar notificaçõe
 - **Deploy**: o workflow `.github/workflows/workflow_build.yaml` gera um ZIP e atualiza a função `tech-floripa-certificates-notification-dev`.
 - **Infra**: a fila SQS continua ligada pela infraestrutura Terraform; apenas o artefato de código mudou de imagem para ZIP.
 
+## DynamoDB Single-Table Design
+
+Este projeto utiliza o padrão DynamoDB Single-Table Design. O CertificateRepository opera na mesma tabela que a API.
+
+### Estrutura da Tabela (compartilhada)
+
+| Atributo | Tipo | Descrição |
+|----------|------|-----------|
+| `PK` | String | Chave de Partição principal |
+| `SK` | String | Chave de Ordenação principal |
+| `GSI1PK`, `GSI1SK` | String | GSI1 para Certificate por UUID |
+| `GSI2PK`, `GSI2SK` | String | GSI2 para acesso por email |
+| `GSI3PK`, `GSI3SK` | String | GSI3 para acesso por produto |
+| `GSI4PK`, `GSI4SK` | String | GSI4 para certificados por status |
+| `GSI5PK`, `GSI5SK` | String | GSI5 para Participants por cidade |
+| `EntityType` | String | Tipo da entidade |
+
+### GSI4 - Acesso por Status de Sucesso
+
+| GSI4PK | GSI4SK | Uso |
+|--------|--------|-----|
+| `SUCCESS#true` | `CERTIFICATE#<uuid>` | Certificados bem-sucedidos |
+| `SUCCESS#false` | `CERTIFICATE#<uuid>` | Certificados falhados |
+
+### Repositório de Certificados
+
+O `CertificateRepositoryImpl` utiliza:
+- **GSI1**: Busca por UUID do certificado
+- **GSI2**: Busca por email do participante
+- **GSI3**: Busca por product_id
+- **GSI4**: Busca por status de sucesso
+
 ## Estrutura do Evento
 
 ### Entrada (SQS)
