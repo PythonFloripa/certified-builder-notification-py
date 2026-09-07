@@ -35,7 +35,6 @@ Este projeto utiliza o padrão DynamoDB Single-Table Design. O CertificateReposi
 | `GSI2PK`, `GSI2SK` | String | GSI2 para acesso por email |
 | `GSI3PK`, `GSI3SK` | String | GSI3 para acesso por produto |
 | `GSI4PK`, `GSI4SK` | String | GSI4 para certificados por status |
-| `GSI5PK`, `GSI5SK` | String | GSI5 para Participants por cidade |
 | `EntityType` | String | Tipo da entidade |
 
 ### GSI4 - Acesso por Status de Sucesso
